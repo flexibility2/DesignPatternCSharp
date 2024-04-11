@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 
 namespace P05_Decorator.Step3_Decorator
 {
-    public class FullDiscountDecorator : IRental
+    public class FullDiscountDecorator : RentalDecorator
     {
-        private IRental _inner;
-
-        public FullDiscountDecorator(IRental inner)
+        public FullDiscountDecorator(IRental inner) : base(inner)
         {
-            _inner = inner;
         }
 
-        public decimal CalculateRent()
+        public override decimal CalculateRent()
         {
-            decimal rent = _inner.CalculateRent();
+            decimal rent = base.CalculateRent();
             int discountTime = (int)Math.Floor(rent / 500);
             return rent - discountTime * 30;
         }
